@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+        crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="jumbotron">
+            <h1 class="text-center">
+                <span class="glyphicon glyphicon-fire"></span> Hot Restaurant</h1>
+            <hr>
+            <h2 class="text-center">Make your reservation</h2>
+            <br>
+
+            <div class="text-center">
+                <a href="/tables">
+                    <button type="button" class="btn btn-lg btn-primary">
+                        <span class="glyphicon glyphicon-list-alt"></span> View Tables</button>
+                </a>
+                <a href="/">
+                    <button type="button" class="btn btn-lg btn-default">
+                        <i class="fas fa-home"></i>
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+
+                <!-- Reservations -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Table Reservation</h4>
+                    </div>
+                    <div class="panel-body">
+
+                        <form role="form">
+
+                            <div class="form-group">
+                                <label for="">Name</label>
+                                <input type="text" class="form-control" id="reserve_name">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Phone Number</label>
+                                <input type="text" class="form-control" id="reserve_phone">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input type="text" class="form-control" id="reserve_email">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Unique ID</label>
+                                <input type="text" class="form-control" id="reserve_uniqueID">
+                            </div>
+
+                            <button id="reserve" type="submit" class="btn btn-primary submit">Submit</button>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <footer class="footer">
+            <div class="container">
+                <p>
+                    <a href="/api/?command=viewTables">API Table Link</a> |
+                    <a href="/api/?command=waitlist">API Wait List</a>
+                </p>
+            </div>
+        </footer>
+        <script>
+            $('#reserve').on('click', function (e, data) {
+                e.preventDefault();
+                var name = $('#reserve_name').val();
+                var email = $('#reserve_email').val();
+                var tel = $('#reserve_tel').val();
+                var id = $('#reserve_uniqueID').val();
+                $.get(`/api/?command=bookReservation&${name}&email=${email}&tel=${tel}&id=${id}`, function (data) {
+                    console.log(data);
+                });
+            });
+        </script>
+    </div>
+</body>
+
+</html>
